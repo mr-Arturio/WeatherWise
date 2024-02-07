@@ -10,6 +10,7 @@ export default function Navbar({}: Props) {
           <h1 className='text-gray-500 text-3xl font-bold'>Weather App</h1>
         </p>
       </div>
+      test
     </nav>
   )
 }
