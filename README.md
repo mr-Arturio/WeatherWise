@@ -32,3 +32,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 Dependencies
 - npm install react-icons --save
+- npm i tailwind-merge clsx
