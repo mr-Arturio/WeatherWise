@@ -33,3 +33,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 Dependencies
 - npm install react-icons --save
 - npm i tailwind-merge clsx
+- npm i @tanstack/react-query
+
+https://openweathermap.org/
+https://api.openweathermap.org/data/2.5/forecast?q=$ottawa&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56
