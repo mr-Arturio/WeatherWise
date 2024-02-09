@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Navbar from "../components/Navbar";
-
+import { useQuery } from "@tanstack/react-query";
 
 interface WeatherDetail {
   dt: number;
@@ -60,9 +60,19 @@ interface WeatherData {
 //https://api.openweathermap.org/data/2.5/forecast?q=$ottawa&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56
 
 export default function Home() {
+  const { isPending, error, data } = useQuery({
+    queryKey: ["repoData"],
+    queryFn: () =>
+      fetch(
+        "https://api.openweathermap.org/data/2.5/forecast?q=$ottawa&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56"
+      ).then((res) => res.json()),
+  });
+
+  if (isPending) return "Loading...";
+
   return (
-  <div className="flex flex-col gap-4 bg-gray-100 min-h-screen">
-    <Navbar />
+    <div className="flex flex-col gap-4 bg-gray-100 min-h-screen">
+      <Navbar />
     </div>
-    );
+  );
 }
