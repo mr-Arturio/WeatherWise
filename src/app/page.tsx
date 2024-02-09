@@ -63,8 +63,6 @@ interface WeatherData {
 //https://api.openweathermap.org/data/2.5/forecast?q=$ottawa&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56
 
 export default function Home() {
-
-
   const { isLoading, error, data, refetch } = useQuery<WeatherData>({
     queryKey: ["repoData"],
     queryFn: async () => {
@@ -72,12 +70,17 @@ export default function Home() {
         `https://api.openweathermap.org/data/2.5/forecast?q=ottawa&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56`
       );
       return data;
-    }
+    },
   });
 
-  console.log("data", data);
+  console.log("data", data?.city.name);
 
-  // if (isPending) return "Loading...";
+  if (isLoading)
+    return (
+      <div className="flex items-center min-h-screen justify-center">
+        <p className="animate-bounce">Loading...</p>
+      </div>
+    );
 
   return (
     <div className="flex flex-col gap-4 bg-gray-100 min-h-screen">
