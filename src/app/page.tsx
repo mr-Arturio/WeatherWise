@@ -6,6 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { format } from "date-fns";
 import { parseISO } from "date-fns/parseISO";
+import Container from "@/components/Container";
+import { KelvinToCelsius } from "@/utils/KelvinToCelsius";
 
 interface WeatherDetail {
   dt: number;
@@ -95,8 +97,19 @@ export default function Home() {
           <div>
             <h2 className="flex gap-1 text-2xl items-end">
               <p> {format(parseISO(firstData?.dt_txt ?? ""), "EEEE")} </p>
-              <p className="text-lg"> ({format(parseISO(firstData?.dt_txt ?? ""), "dd.MM.yyyy")}) </p>
+              <p className="text-lg">
+                {" "}
+                ({format(parseISO(firstData?.dt_txt ?? ""), "dd.MM.yyyy")}){" "}
+              </p>
             </h2>
+            <Container className=" gap-10 px-6 items-center">
+
+            </Container>
+            <Container className="w-fit  justify-center flex-col px-4 items-center ">
+              <div className="flex flex-col px-4">
+                {KelvinToCelsius(firstData?.main.temp ?? 0)}°C
+              </div>
+            </Container>
           </div>
         </section>
 
