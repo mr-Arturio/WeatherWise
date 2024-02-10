@@ -4,6 +4,8 @@ import Image from "next/image";
 import Navbar from "../components/Navbar";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { format } from "date-fns";
+import { parseISO } from "date-fns/parseISO";
 
 interface WeatherDetail {
   dt: number;
@@ -92,7 +94,8 @@ export default function Home() {
         <section>
           <div>
             <h2 className="flex gap-1 text-2xl items-end">
-              <p></p>
+              <p> {format(parseISO(firstData?.dt_txt ?? ""), "EEEE")} </p>
+              <p className="text-lg"> ({format(parseISO(firstData?.dt_txt ?? ""), "dd.MM.yyyy")}) </p>
             </h2>
           </div>
         </section>
