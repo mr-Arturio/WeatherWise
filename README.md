@@ -35,6 +35,7 @@ Dependencies
 - npm i tailwind-merge clsx
 - npm i @tanstack/react-query
 - npm i axios
+- npm i date-fns
 
 https://openweathermap.org/
 https://api.openweathermap.org/data/2.5/forecast?q=$ottawa&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56
