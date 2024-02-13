@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { MdSunny, MdMyLocation, MdLocationOn } from "react-icons/md";
 import SearchBox from "./SearchBox";
@@ -15,6 +17,69 @@ export default function Navbar({}: Props) {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
+  async function handleInputChang(value: string) {
+    setCity(value);
+    if (value.length >= 3) {
+      try {
+        const response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/find?q=${value}&appid=${API_KEY}`
+        );
+
+        const suggestions = response.data.list.map((item: any) => item.name);
+        setSuggestions(suggestions);
+        setError("");
+        setShowSuggestions(true);
+      } catch (error) {
+        setSuggestions([]);
+        setShowSuggestions(false);
+      }
+    } else {
+      setSuggestions([]);
+      setShowSuggestions(false);
+    }
+  }
+
+  function handleSuggestionClick(value: string) {
+    setCity(value);
+    setShowSuggestions(false);
+  }
+
+  function handleSubmiSearch(e: React.FormEvent<HTMLFormElement>) {
+    // setLoadingCity(true);
+    e.preventDefault();
+    if (suggestions.length == 0) {
+      setError("Location not found");
+      // setLoadingCity(false);
+    } else {
+      setError("");
+      // setTimeout(() => {
+        // setLoadingCity(false);
+        // setPlace(city);
+        setShowSuggestions(false);
+      // }, 500);
+    }
+  }
+
+  // function handleCurrentLocation() {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(async (postiion) => {
+  //       const { latitude, longitude } = postiion.coords;
+  //       try {
+  //         setLoadingCity(true);
+  //         const response = await axios.get(
+  //           `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
+  //         );
+  //         setTimeout(() => {
+  //           setLoadingCity(false);
+  //           setPlace(response.data.name);
+  //         }, 500);
+  //       } catch (error) {
+  //         setLoadingCity(false);
+  //       }
+  //     });
+  //   }
+  // }
+
   return (
     <nav className="shadow-sm sticky top-0 left-0 z-50 bg-blue-200/80">
       <div className="h-[80px] w-full flex justify-between items-center max-w-screen-2xl px-3 mx-auto">
@@ -26,11 +91,58 @@ export default function Navbar({}: Props) {
           <MdMyLocation className="text-2xl text-gray-400 hover:opacity-80 cursor-pointer" />
           <MdLocationOn className="text-3xl" />
           <p className="text-slate-900/80 text-sm"> Canada </p>
-          <div>
-            <SearchBox />
+          <div className="relative hidden md:flex">
+            {/* SearchBox */}
+            <SearchBox
+              value={city}
+              onSubmit={handleSubmiSearch}
+              onChange={(e) => handleInputChang(e.target.value)}
+            />
+            <SuggetionBox
+            //using spread operator to pass the props
+              {...{
+                showSuggestions,
+                suggestions,
+                handleSuggestionClick,
+                error,
+              }}
+            />
           </div>
         </section>
       </div>
     </nav>
+  );
+}
+
+function SuggetionBox({
+  showSuggestions,
+  suggestions,
+  handleSuggestionClick,
+  error,
+}: {
+  showSuggestions: boolean;
+  suggestions: string[];
+  handleSuggestionClick: (item: string) => void;
+  error: string;
+}) {
+  return (
+    <>
+      {((showSuggestions && suggestions.length > 1) || error) && (
+        <ul className="mb-4 bg-white absolute border top-[44px] left-0 border-gray-300 rounded-md min-w-[200px]  flex flex-col gap-1 py-2 px-2">
+          {error && suggestions.length < 1 && (
+            <li className="text-red-500 p-1 "> {error}</li>
+          )}
+          {suggestions.map((item, i) => (
+            <li
+              key={i}
+              onClick={() => handleSuggestionClick(item)}
+              className="cursor-pointer p-1 rounded   hover:bg-gray-200"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 }
