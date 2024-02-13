@@ -9,6 +9,7 @@ import { parseISO } from "date-fns/parseISO";
 import Container from "@/components/Container";
 import { KelvinToCelsius } from "@/utils/KelvinToCelsius";
 import WeatherIcon from "@/components/WeatherIcon";
+import { getDayOrNightIcon } from "@/utils/DayOrNightIcon";
 
 interface WeatherDetail {
   dt: number;
@@ -139,7 +140,10 @@ export default function Home() {
                     </p>
 
                     <WeatherIcon
-                      iconName={data.weather[0].icon}
+                      iconName={getDayOrNightIcon(
+                        data.weather[0].icon,
+                        data.dt_txt
+                      )}
                     />
                     <p>{KelvinToCelsius(data?.main.temp ?? 0)}°</p>
                   </div>
