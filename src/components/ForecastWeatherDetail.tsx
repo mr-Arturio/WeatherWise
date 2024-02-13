@@ -26,7 +26,7 @@ export default function ForecastWeatherDetail(
     feels_like,
     temp_min,
     temp_max,
-    description
+    description,
   } = props;
   return (
     <Container className="gap-4">

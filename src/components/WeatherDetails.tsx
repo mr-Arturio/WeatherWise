@@ -20,7 +20,7 @@ export default function WeatherDetails(props: WeatherDetailProps) {
     windSpeed = "7 km/h",
     airPressure = "1012 hPa",
     sunrise = "6.20",
-    sunset = "18:48"
+    sunset = "18:48",
   } = props;
 
   return (
