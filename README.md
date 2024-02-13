@@ -17,11 +17,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - npm i @tanstack/react-query
 - npm i axios
 - npm i date-fns
+- npm i jotai
 
 ### Resources
 - https://openweathermap.org/ - weather API
   - https://api.openweathermap.org/data/2.5/forecast?q=$ottawa&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56
 - https://react-icons.github.io/react-icons/ - icons import
+- https://jotai.org/ - Primitive and flexible state management for React
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
