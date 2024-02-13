@@ -8,6 +8,7 @@ import { format } from "date-fns";
 import { parseISO } from "date-fns/parseISO";
 import Container from "@/components/Container";
 import { KelvinToCelsius } from "@/utils/KelvinToCelsius";
+import WeatherIcon from "@/components/WeatherIcon";
 
 interface WeatherDetail {
   dt: number;
@@ -93,8 +94,8 @@ export default function Home() {
       <Navbar />
       <main className="px-3 max-w-screen-2xl mx-auto flex flex-col gap-9 w-full pb-10 pt-4">
         {/* today forcast  data  */}
-        <section>
-          <div>
+        <section className="space-y-4">
+          <div className="space-y-2">
             <h2 className="flex gap-1 text-2xl items-end">
               <p> {format(parseISO(firstData?.dt_txt ?? ""), "EEEE")} </p>
               <p className="text-lg">
@@ -127,6 +128,23 @@ export default function Home() {
                 </p>
               </div>
               {/* time  and weather  icon */}
+              <div className="flex gap-10 sm:gap-16 overflow-x-auto w-full justify-between pr-3">
+                {data?.list.map((data, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col justify-between gap-2 items-center text-xs font-semibold "
+                  >
+                    <p className="whitespace-nowrap">
+                      {format(parseISO(data.dt_txt), "h:mm a")}
+                    </p>
+
+                    <WeatherIcon
+                      iconName={data.weather[0].icon}
+                    />
+                    <p>{KelvinToCelsius(data?.main.temp ?? 0)}°</p>
+                  </div>
+                ))}
+              </div>
             </Container>
             <Container className="w-fit  justify-center flex-col px-4 items-center "></Container>
           </div>
