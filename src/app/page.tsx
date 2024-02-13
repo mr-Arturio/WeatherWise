@@ -4,7 +4,7 @@ import Image from "next/image";
 import Navbar from "../components/Navbar";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { format } from "date-fns";
+import { format, fromUnixTime } from "date-fns";
 import { parseISO } from "date-fns/parseISO";
 import Container from "@/components/Container";
 import { KelvinToCelsius } from "@/utils/KelvinToCelsius";
@@ -13,6 +13,8 @@ import { getDayOrNightIcon } from "@/utils/DayOrNightIcon";
 import { metersToKilometers } from "@/utils/metersToKilometers";
 import { convertWindSpeed } from "@/utils/windSpeed";
 import ForecastWeatherDetail from "@/components/ForecastWeatherDetail";
+import WeatherDetails from "@/components/WeatherDetails";
+
 
 interface WeatherDetail {
   dt: number;
@@ -84,7 +86,7 @@ export default function Home() {
 
   const firstData = data?.list[0];
 
-  // console.log("data", data?.city.name);
+  console.log("data", data?.city.name);
 
   if (isLoading)
     return (
@@ -132,33 +134,66 @@ export default function Home() {
                 </p>
               </div>
               {/* time  and weather  icon */}
-              <div className="flex gap-10 sm:gap-16 overflow-x-auto w-full justify-between pr-3">
-                {data?.list.map((data, index) => (
+              <div className="flex gap-10 sm:gap-16 overflow-x-auto w-auto justify-between pr-3">
+                {data?.list.map((d, index) => (
                   <div
                     key={index}
                     className="flex flex-col justify-between gap-2 items-center text-xs font-semibold "
                   >
                     <p className="whitespace-nowrap">
-                      {format(parseISO(data.dt_txt), "h:mm a")}
+                      {format(parseISO(d.dt_txt), "h:mm a")}
                     </p>
 
                     <WeatherIcon
-                      iconName={getDayOrNightIcon(
-                        data.weather[0].icon,
-                        data.dt_txt
-                      )}
+                      iconName={getDayOrNightIcon(d.weather[0].icon, d.dt_txt)}
                     />
-                    <p>{KelvinToCelsius(data?.main.temp ?? 0)}°</p>
+                    <p>{KelvinToCelsius(d?.main.temp ?? 0)}°</p>
                   </div>
                 ))}
               </div>
             </Container>
             <Container className="w-fit  justify-center flex-col px-4 items-center "></Container>
           </div>
+          <div className=" flex gap-4">
+            {/* left  */}
+            <Container className="w-fit  justify-center flex-col px-4 items-center ">
+              <p className=" capitalize text-center">
+                {firstData?.weather[0].description}{" "}
+              </p>
+              <WeatherIcon
+                iconName={getDayOrNightIcon(
+                  firstData?.weather[0].icon ?? "",
+                  firstData?.dt_txt ?? ""
+                )}
+              />
+            </Container>
+            {/* right */}
+            <Container className="bg-yellow-300/80  px-8 gap-4 justify-between overflow-x-auto">
+            <WeatherDetails
+                    visability={metersToKilometers(
+                      firstData?.visibility ?? 10000
+                    )}
+                    airPressure={`${firstData?.main.pressure} hPa`}
+                    humidity={`${firstData?.main.humidity}%`}
+                    sunrise={format(
+                      fromUnixTime(data?.city.sunrise ?? 1702949452),
+                      "H:mm"
+                    )}
+                    sunset={format(
+                      fromUnixTime(data?.city.sunset ?? 1702517657),
+                      "H:mm"
+                    )}
+                    windSpeed={convertWindSpeed(firstData?.wind.speed ?? 1.64)}
+                  />
+              
+            </Container>
+          </div>
         </section>
 
         {/* 7 day forcast data  */}
-        <section></section>
+        <section className="flex w-full flex-col gap-4">
+          <p className="text-2xl">Forcast (7 days)</p>
+        </section>
       </main>
     </div>
   );
