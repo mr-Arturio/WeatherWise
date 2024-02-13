@@ -10,6 +10,9 @@ import Container from "@/components/Container";
 import { KelvinToCelsius } from "@/utils/KelvinToCelsius";
 import WeatherIcon from "@/components/WeatherIcon";
 import { getDayOrNightIcon } from "@/utils/DayOrNightIcon";
+import { metersToKilometers } from "@/utils/metersToKilometers";
+import { convertWindSpeed } from "@/utils/windSpeed";
+import ForecastWeatherDetail from "@/components/ForecastWeatherDetail";
 
 interface WeatherDetail {
   dt: number;
