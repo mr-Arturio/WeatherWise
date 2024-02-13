@@ -103,13 +103,32 @@ export default function Home() {
               </p>
             </h2>
             <Container className=" gap-10 px-6 items-center">
-
-            </Container>
-            <Container className="w-fit  justify-center flex-col px-4 items-center ">
+              {/* temprature */}
               <div className="flex flex-col px-4">
-                {KelvinToCelsius(firstData?.main.temp ?? 0)}°C
+                <span className="text-5xl">
+                  {KelvinToCelsius(firstData?.main.temp ?? 296.37)}°
+                </span>
+                <p className="text-xs space-x-1 whitespace-nowrap">
+                  <span> Feels like</span>
+                  <span>
+                    {KelvinToCelsius(firstData?.main.feels_like ?? 0)}°
+                  </span>
+                </p>
+                <p className="text-xs space-x-2">
+                  <span>
+                    {KelvinToCelsius(firstData?.main.temp_min ?? 0)}
+                    °↓{" "}
+                  </span>
+                  <span>
+                    {" "}
+                    {KelvinToCelsius(firstData?.main.temp_max ?? 0)}
+                    °↑
+                  </span>
+                </p>
               </div>
+              {/* time  and weather  icon */}
             </Container>
+            <Container className="w-fit  justify-center flex-col px-4 items-center "></Container>
           </div>
         </section>
 
