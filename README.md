@@ -7,7 +7,6 @@ created using `Next.js`, `TypeScript`, `Tailwind`, `WeatherAPI`. <br>
 - View current day weather forecasts.
 - Access 7-day weather forecasts.
 
-
 ####  Weather App Main Screen
 ![Main screen](./public/weatherApp.png)
 
