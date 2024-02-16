@@ -18,6 +18,7 @@ import { loadingCityAtom, placeAtom } from "@/app/atom";
 import { useAtom } from "jotai";
 import { useEffect } from "react";
 import WeatherSkeleton from "@/components/WeatherSkeleton";
+import Footer from "@/components/Footer";
 
 interface WeatherDetail {
   dt: number;
@@ -257,6 +258,7 @@ export default function Home() {
           </>
         )}
       </main>
+      <Footer />
     </div>
   );
 }
