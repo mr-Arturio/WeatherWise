@@ -1,17 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Weather App
+created using `Next.js`, `TypeScript`, `Tailwind`, `WeatherAPI`. <br>
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Features
+- Search for weather forecasts by city.
+- Use your current location to find weather forecasts.
+- View current day weather forecasts.
+- Access 7-day weather forecasts.
 
 
-### Dependencies
+####  Weather App Main Screen
+![Main screen](./public/weatherApp.png)
+
+#### Weather App Loading Screen
+![Loading Screen](./public/weatherLoading.png)
+
+
+### Getting Started
+
+To get a local copy up and running, follow these simple steps:
+
+##### Clone the repo
+   ```bash
+   git clone https://github.com/mr-Arturio/Wheather_App.git
+   ```
+- npm install      
 - npm install react-icons --save
 - npm i tailwind-merge clsx
 - npm i @tanstack/react-query
@@ -19,11 +31,28 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - npm i date-fns
 - npm i jotai
 
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Dependencies
+- `@tanstack/react-query`: "^5.18.1",
+- `axios`: "^1.6.7",
+- `clsx`: "^2.1.0",
+- `date-fns`: "^3.3.1",
+- `jotai`: "^2.6.4",
+- `next`: "14.1.0",
+- `react`: "^18",
+- `react-dom`: "^18",
+- `react-icons`: "^5.0.1",
+- `tailwind-merge`: `^2.2.1"
+
 ### Resources
-- https://openweathermap.org/ - weather API
-  - https://api.openweathermap.org/data/2.5/forecast?q=$ottawa&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56
-- https://react-icons.github.io/react-icons/ - icons import
-- https://jotai.org/ - Primitive and flexible state management for React
+- [OpenWeatherMap](https://openweathermap.org/): Provides the weather data used in the app through their API.
+  - ```https://api.openweathermap.org/data/2.5/forecast?q=$ottawa&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56```
+- [React Icons](https://react-icons.github.io/react-icons/): Supplies icons for the user interface, enhancing visual appeal and user experience.
+- [Jotai](https://jotai.org/): A minimalistic state management solution for React that helps manage the app's state with simplicity and efficiency.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
