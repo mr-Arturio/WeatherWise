@@ -1,5 +1,6 @@
 ## Weather App
 created using `Next.js`, `TypeScript`, `Tailwind`, `WeatherAPI`. <br>
+Deployed on [Vercel Platform]([https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme](https://vercel.com/home)) - https://weather-app-liard-ten.vercel.app/ <br>
 
 ### Features
 - Search for weather forecasts by city.
