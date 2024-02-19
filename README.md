@@ -1,4 +1,4 @@
-## Weather App
+## WeatherWise
 created using `Next.js`, `TypeScript`, `Tailwind`, `WeatherAPI`. <br>
 
 ### Features
@@ -7,10 +7,10 @@ created using `Next.js`, `TypeScript`, `Tailwind`, `WeatherAPI`. <br>
 - View current day weather forecasts.
 - Access 7-day weather forecasts.
 
-####  Weather App Main Screen
+####  WeatherWise Main Screen
 ![Main screen](./public/weatherApp.png)
 
-#### Weather App Loading Screen
+#### WeatherWise Loading Screen
 ![Loading Screen](./public/weatherLoading.png)
 
 
